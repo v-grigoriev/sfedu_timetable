@@ -1,0 +1,33 @@
+{
+	"manifest_version" : 2,
+	"name" : "Экспорт расписания ТТИ ЮФУ",
+	"version" : "0.1",
+
+	"icons": { "16": "icons/icon16.png",
+           	   "48": "icons/icon48.png",
+               "128": "icons/icon128.png"
+           },
+
+	"page_action": {
+		"default_title" : "Экспортировать",
+		"default_icon": {                    
+            "16": "icons/icon16.png",           
+            "24": "icons/icon24.png",           
+            "32": "icons/icon32.png"            
+          }
+	},
+
+	"background" : {
+		"scripts" : ["bower_components/moment/min/moment-with-locales.min.js", "background.js"]
+	},
+
+	"content_scripts" : [
+		{
+			"matches" : ["*://*.sfedu-tgn.ru/raspisanie/ShowRaspisanie.aspx*"],
+			"css" : ["selectable_timetable.css"],
+			"js" : ["selectable_timetable.js"]
+		}
+	],
+
+	"permissions": ["downloads"]
+}
