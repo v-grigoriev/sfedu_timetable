@@ -93,7 +93,8 @@ if (parseInt(getParameterByName("isPotok")) >= 153)  {
 	var eventRegex = /(([А-Яа-я]+\s+[А-Яа-я]+\.([А-Яа-я]+\.)?\s+)?(.+?)\s+(\((лек|прак|лаб|экз|конс)\.\))\s+((([А-Яа-я]{4}[0-9]{1,2})\s*?-\s*?[0-9]+)(\s+(1|2)пг\.)?\s*)*([А-Яа-я0-9]+\s*-\s*[А-Яа-я0-9]+)(\s+\([0-9]+-[0-9]+\))?(\s+(1|2)пг\.)?)/g;
 	var weekdayRegex = /(Понедельник|Вторник|Среда|Четверг|Пятница|Суббота|Воскресенье)/g;
 	var dateRegex = /([0-9]+\.[0-9]+\.[0-9]+)/g;
-	
+	var weeksPattern = /(\([0-9]{1,2}-[0-9]{1,2}\))/g
+
 	var tables = document.querySelectorAll("table")
 	
 	tables.forEach(function(table) {
@@ -160,6 +161,13 @@ if (parseInt(getParameterByName("isPotok")) >= 153)  {
 					})
 		
 					matches.sort(function(a,b) {
+						var aWeeksMathes = a.match(weeksPattern)
+						var bweeksMathes = b.match(weeksPattern)
+
+						if (aWeeksMathes && bweeksMathes) { 
+							return aWeeksMathes[0].localeCompare(bweeksMathes[0])
+						}
+
 						return a.localeCompare(b)
 					})
 		
