@@ -1,0 +1,43 @@
+.selectable {
+	cursor: pointer; 
+}
+
+.selectable:hover {
+	background-color: #E3F2FD;
+}
+
+.selectable:active {
+	background-color: #42A5F5;
+}
+
+.selected {
+	background-color: #64b5f6;
+}
+
+.selected:hover {
+	background-color: #64b5f6;
+}
+
+.selected:active {
+	background-color: #42A5F5;
+}
+
+.table_timetable {
+  	display: table;
+}
+
+.row_timetable {
+	display: table-row;
+}
+
+.cell_timetable {
+	display: table-cell;
+	padding: 3px;
+}
+
+
+.select_all {
+	color: #07C;
+	text-decoration: underline;
+	cursor: pointer; 
+}
