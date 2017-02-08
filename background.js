@@ -104,6 +104,10 @@ function processResponse(response) {
 }
 
 function createICalEvent(event, firstWeek, lastWeek) {
+	if (typeof event.week === 'string') {
+		event.week = parseInt(event.week)
+	}
+
 	var vEvent = BEGIN + VEVENT + LINE_ENDING
 
 	var startTime = moment(event.timeInterval.start, "HH:mm")
@@ -121,15 +125,14 @@ function createICalEvent(event, firstWeek, lastWeek) {
 		var weeksMathes = event.text.match(weeksPattern)
 
 		if (weeksMathes) {
-			var lastDate = firstWeek.clone()
+			var lastDate = firstDate.clone()
 
 			var weeksInterval = {
 								 start: parseInt(weeksMathes[0].substring(1, weeksMathes[0].length - 1).split('-')[0]),
 								 end: parseInt(weeksMathes[0].substring(1, weeksMathes[0].length - 1).split('-')[1])
 								}
-
 			switch(event.week) {
-				case 1:
+				case 2:
 					if (weeksInterval.start % 2 != 0) {
 						weeksInterval.start++
 					}
@@ -138,7 +141,7 @@ function createICalEvent(event, firstWeek, lastWeek) {
 					}
 					break
 
-				case 2:
+				case 1:
 					if (weeksInterval.start % 2 == 0) {
 						weeksInterval.start++
 					}
@@ -157,13 +160,13 @@ function createICalEvent(event, firstWeek, lastWeek) {
 			switch(event.week) {
 				case 1:
 					if (firstDate.week() - firstWeek.week() == 1) {
-						irstDate.add(1, 'weeks')
+						firstDate.add(1, 'weeks')
 					}
 					break
 
 				case 2:
 					if (firstDate.week() - firstWeek.week() == 0) {
-						irstDate.add(1, 'weeks')
+						firstDate.add(1, 'weeks')
 					}
 					break
 			}
